@@ -9,11 +9,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+
         FXMLLoader loader = new FXMLLoader(
-                App.class.getResource("/src/main/resources/at/ac/hcw/vmap/ui/main_view.fxml")
+                App.class.getResource("/at/ac/hcw/vmap/ui/main_view.fxml")
         );
 
-        Scene scene = new Scene(loader.load(), 800, 500);
+        Scene scene = new Scene(loader.load(), 900, 700);
         stage.setTitle("VMAP");
         stage.setScene(scene);
         stage.show();

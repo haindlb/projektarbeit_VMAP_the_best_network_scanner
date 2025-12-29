@@ -12,11 +12,12 @@ import java.util.logging.LogRecord;
 
 public class LogHandlerList extends Handler{
 
-
+    //Statische Konstante für Zeitformat kann pber String Pattern geändert werden HH:mm:ss ZoneId bitte lassen, Erkennung Zeitzone von OS
     private static final DateTimeFormatter TS = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault());
     
-    private final ObservableList<String> target;
-    private final ListView<String> listView;
+    private final ObservableList<String> target; //Formatierte Logzeilen werden in Liste gespeicht
+    //muss unbedingt Observable bleiben mit ArrayList werden die Änderungen nicht automatisch in FX gemeldet--> sonst refresh manual
+    private final ListView<String> listView; //Referenz auf UI-ListView --> automatischen scrollen
     private final int maxItems;
 
     public LogHandlerList(ObservableList<String> target, ListView<String> listView, int maxItems) {
@@ -24,35 +25,41 @@ public class LogHandlerList extends Handler{
         this.listView = listView;
         this.maxItems = maxItems;
     }
+    //Methoden sind durch Java Superklasse Handler vorgeschrieben -> publish eigens etabliert für FX Viewer
 
     @Override
     public void publish(LogRecord record) {
-        if(!isLoggable(record)) return;
+        if(!isLoggable(record)) return; //Prüfung Loglevel und Filter
 
         String name = record.getLoggerName();
         if (name == null || !name.startsWith("at.ac.hcw.vmap")) {
-            return; // alles andere (javafx.*, com.sun.*, etc.) ignorieren
+            return; // alles andere javafx. ignorieren -> sonst zu viele Log Einträge
         }
 
 
-        String time = TS.format(Instant.ofEpochMilli(record.getMillis()));
-        String row = time + " [" + record.getLevel().getName() + "] " + "--  " + record.getMessage();
+        String time = TS.format(Instant.ofEpochMilli(record.getMillis())); //Formatierung Zeitstempel in Config oben
+        String row = time + " [" + record.getLevel().getName() + "] " + "--  " + record.getMessage(); //Erstellung Logzeile
         
-        if(record.getThrown() != null){
+        if(record.getThrown() != null){ //Gibt es eine Exception wenn ja Sonderzeile Severe
             row += " | Error=" + record.getThrown().getClass().getSimpleName() + ": " + record.getThrown().getMessage();
         }
         
-        String finalrow = row;
+        String finalRow = row; //Brauch ich für FX UI Thread da row in Klasse publish sitz und nach übergabe auch nicht geändert werden darf --> final
 
-        Platform.runLater(new Runnable() {
+            //Ganz WICHTIG!!!! UI darf nur von JAVAFX Application Thread verändet werden --> keinen UI Zugriff von anderen Threads
+            //Publisch läuft ohne dem im Hintergrund Thread und somit nicht in UI
+            //„Hey JavaFX, führe diesen Code in deinem UI-Thread aus"
+            //Runlater weil sonst Deadlock weil JavaFX nicht unterbrochen werden darf
+
+             Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                target.add(finalrow);
+                target.add(finalRow); //automatische Aktualisierung
 
                 if(target.size() > maxItems){
-                    target.remove(0,target.size() - maxItems);
+                    target.remove(0,target.size() - maxItems); //Wenn limit überschritten letzer Eintrag wird gelöscht
                 }
-                listView.scrollTo(target.size() - 1);
+                listView.scrollTo(target.size() - 1); //scrollt Liste im UI zu neuesten Eintrag
             }
         });
     }

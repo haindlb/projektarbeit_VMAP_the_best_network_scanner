@@ -6,17 +6,17 @@ import javafx.scene.control.TextField;
 
 public class MainViewController {
 
-    @FXML private TextField targetField;
-    @FXML private TextField portField;
+    @FXML private TextField fldTarget;
+    @FXML private TextField fldPort;
     @FXML private ListView<String> logList;
 
     @FXML
-    private void onStartScanClicked() {
+    private void startScanClicked() {
         // TODO scan starten
     }
 
     @FXML
-    private void onExportCsvClicked() {
+    private void exportCsvClicked() {
         // TODO export starten
     }
 }

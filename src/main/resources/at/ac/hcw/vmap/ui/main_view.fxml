@@ -5,38 +5,27 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.hcw.vmap.ui.MainViewController">
-
     <Label layoutX="410.0" layoutY="20.0" text="V-MAP">
         <font>
             <Font size="28.0" />
         </font>
     </Label>
-
     <VBox layoutX="85.0" layoutY="120.0" spacing="20.0">
-
         <HBox spacing="10.0">
             <Label prefWidth="60.0" text="Target" />
-            <TextField fx:id="targetField" prefHeight="32.0" prefWidth="200.0" promptText="z.B. 192.168.100.1" style="-fx-border-color: black; -fx-border-width: 2;" />
+            <TextField fx:id="fldTarget" prefHeight="32.0" prefWidth="200.0" promptText="z.B. 192.168.100.1" style="-fx-border-color: black; -fx-border-width: 2;" />
         </HBox>
-
         <HBox spacing="10.0">
             <Label prefWidth="60.0" text="Port" />
-            <TextField fx:id="portField" prefHeight="32.0" prefWidth="200.0" promptText="z.B. 80" style="-fx-border-color: black; -fx-border-width: 2;" />
+            <TextField fx:id="fldPort" prefHeight="32.0" prefWidth="200.0" promptText="z.B. 80" style="-fx-border-color: black; -fx-border-width: 2;" />
         </HBox>
-
     </VBox>
-
-    <Button fx:id="startScanButton" layoutX="85.0" layoutY="511.0" onAction="#onStartScanClicked" prefHeight="48.0" prefWidth="140.0" style="-fx-border-color: #7ac66a; -fx-border-width: 3;" text="Start scan">
+    <Button fx:id="btnStartScan" layoutX="85.0" layoutY="511.0" onAction="#startScanClicked" prefHeight="48.0" prefWidth="140.0" style="-fx-border-color: #7ac66a; -fx-border-width: 3;" text="Start scan">
       <font>
          <Font name="Arial" size="12.0" />
       </font></Button>
-
     <VBox layoutX="547.0" layoutY="120.0" spacing="10.0">
-
-        <ListView fx:id="logList" prefHeight="400.0" prefWidth="280.0" style="-fx-border-color: black; -fx-border-width: 2;" />
-
-        <Button fx:id="exportCsvButton" onAction="#onExportCsvClicked" prefHeight="28.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 2;" text="EXPORT CSV" />
-
+        <ListView fx:id="lstLog" prefHeight="400.0" prefWidth="280.0" style="-fx-border-color: black; -fx-border-width: 2;" />
+        <Button fx:id="btnExportCsv" onAction="#exportCsvClicked" prefHeight="28.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 2;" text="EXPORT CSV" />
     </VBox>
-
 </AnchorPane>

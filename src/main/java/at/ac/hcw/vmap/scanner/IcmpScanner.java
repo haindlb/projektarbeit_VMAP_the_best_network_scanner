@@ -9,6 +9,9 @@ public class IcmpScanner implements Loggable {
 
     public static final Logger LOG = Logger.getLogger(IcmpScanner.class.getName());
 
+    public IcmpScanner() {
+
+    }
 
     public void scanIcmp(){
 
@@ -22,6 +25,10 @@ public class IcmpScanner implements Loggable {
         }
 
         logWarn("Das ein Test");
+
+        for(int i = 0; i < 297; i++){
+            logInfo("Log" + i);
+        }
     }
 
 

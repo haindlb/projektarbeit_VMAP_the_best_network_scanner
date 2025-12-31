@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //Hier keine Vererbung! durch final --> Configklasse
+//Alle Handler werden hier Initiallisiert
 
 public final class LoggingConfig {
 
@@ -25,14 +26,21 @@ public final class LoggingConfig {
         Logger rootLogger = Logger.getLogger("");
         rootLogger.setLevel(Level.INFO);
 
-        //Eigener Hadnler für FXListView geschrieben
+        //Eigener Handler für FXListView geschrieben
         //Über Config Klasse Einstellungen für max. Logs setzen
 
         LogHandlerList fxHandler = new LogHandlerList(items, listView, 1000);
         fxHandler.setLevel(Level.INFO);
 
+        //Eigener Handler für CSVExport geschrieben
+        LogHandlerCsvBuffer csvBuffer = new LogHandlerCsvBuffer(10000);
+        csvBuffer.setLevel(Level.INFO);
+
         //Alle logs aus Klassen automatisch im UI durch Registrierung von am Root Logger
         rootLogger.addHandler(fxHandler);
+
+        //Alle logs aus Klassen automatisch in CSV-Buffer druch Reggistrierung am Root Logger
+        rootLogger.addHandler(csvBuffer);
 
 
 

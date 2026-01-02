@@ -1,7 +1,9 @@
 package at.ac.hcw.vmap.scanner;
 
+import at.ac.hcw.vmap.network.Host;
 import at.ac.hcw.vmap.util.Loggable;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 
@@ -13,6 +15,22 @@ public class IcmpScanner implements Loggable {
 
     }
 
+    //Expects a Host Object to be checked; returns a Boolean true if reachable false if not
+
+    public static boolean scanICMP(Host checkThisHost){
+
+        System.out.println("pinging");
+        try {
+            return checkThisHost.getIpAddress().isReachable(1000);
+
+        }catch (IOException e){
+            System.out.println("IO Error");
+            return false;
+        }
+
+    }
+
+    /*
     public void scanIcmp(){
 
         logInfo("Scanning ICMP.. PLease Wait!");
@@ -30,6 +48,10 @@ public class IcmpScanner implements Loggable {
             logInfo("Log" + i);
         }
     }
+
+     */
+
+
 
 
 

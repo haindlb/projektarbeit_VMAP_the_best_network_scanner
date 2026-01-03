@@ -2,6 +2,7 @@ package at.ac.hcw.vmap.ui;
 
 import at.ac.hcw.vmap.export.CsvExportService;
 import at.ac.hcw.vmap.scanner.IcmpScanner;
+import at.ac.hcw.vmap.scanner.PortScanner;
 import at.ac.hcw.vmap.util.LogHandlerCsvBuffer;
 import at.ac.hcw.vmap.util.Loggable;
 import at.ac.hcw.vmap.util.LoggingConfig;
@@ -24,6 +25,7 @@ public class MainViewController implements Loggable {
     private final ObservableList<String> logItems = FXCollections.observableArrayList();
     public static final Logger LOG = Logger.getLogger(MainViewController.class.getName());
     private IcmpScanner icmpScanner;
+    private PortScanner portScanner;
     private LogHandlerCsvBuffer csvBuffer;
     private CsvExportService exportService;
 
@@ -41,7 +43,10 @@ public class MainViewController implements Loggable {
         // TODO scan starten
         //Test
         icmpScanner = new IcmpScanner();
-        icmpScanner.scanIcmp();
+        icmpScanner.scanICMP("192.168.115.59");
+        portScanner = new PortScanner();
+        portScanner.scanPort("192.168.115.59",80);
+
     }
 
     @FXML

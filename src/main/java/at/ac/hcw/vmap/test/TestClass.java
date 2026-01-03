@@ -1,11 +1,5 @@
 package at.ac.hcw.vmap.test;
 
-import at.ac.hcw.vmap.network.Host;
-import at.ac.hcw.vmap.scanner.IcmpScanner;
-import at.ac.hcw.vmap.scanner.PortScanner;
-
-import java.net.UnknownHostException;
-
 public class TestClass {
     public static void main(String[] args){
 
@@ -19,11 +13,13 @@ public class TestClass {
         }
          */
 
+        /*
         if(PortScanner.scanPort(testHost1,80)){
             System.out.println("REACHABLE");
         }else {
             System.out.println("NOT REACHABLE");
         }
+         */
 
 
 

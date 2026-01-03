@@ -1,9 +1,10 @@
 package at.ac.hcw.vmap.scanner;
 
-import at.ac.hcw.vmap.network.Host;
 import at.ac.hcw.vmap.util.Loggable;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 
@@ -11,29 +12,43 @@ public class IcmpScanner implements Loggable {
 
     public static final Logger LOG = Logger.getLogger(IcmpScanner.class.getName());
 
-    public IcmpScanner() {
-
-    }
-
     //Expects a Host Object to be checked; returns a Boolean true if reachable false if not
 
-    public static boolean scanICMP(Host checkThisHost){
 
-        System.out.println("pinging");
+    public void scanICMP(String checkThisIP){
+
+        InetAddress ipAddress = null;
         try {
-            return checkThisHost.getIpAddress().isReachable(1000);
+            ipAddress=InetAddress.getByName(checkThisIP);
+        }catch (UnknownHostException setIP){
+            logError("Unusable IP, check Host field", setIP);
+        }
 
-        }catch (IOException e){
-            System.out.println("IO Error");
-            return false;
+
+       logInfo("Starting ICMP Check");
+        try {
+            if(ipAddress.isReachable(1000)){
+                logInfo("Host is reachable, ICMP Check successful");
+                //return true;
+            }
+            else {
+                logInfo("Host is unreachable, check firewall settings and IP address");
+                //return false;
+            }
+        }catch (IOException ioException) {
+            logError("IO exception during ICMP check",ioException);
+            //return false;
         }
 
     }
 
-    /*
+
+
+/*
     public void scanIcmp(){
 
         logInfo("Scanning ICMP.. PLease Wait!");
+
 
         try {
             int x = 10 / 0;
@@ -48,8 +63,8 @@ public class IcmpScanner implements Loggable {
             logInfo("Log" + i);
         }
     }
+ */
 
-     */
 
 
 

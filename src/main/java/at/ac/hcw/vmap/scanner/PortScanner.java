@@ -11,22 +11,30 @@ public class PortScanner implements Loggable {
     public static final Logger LOG = Logger.getLogger(PortScanner.class.getName());
 
     //Expects a Host and Port to be checked; returns a Boolean true if reachable false if not, also logs results
-    public boolean scanPort(String checkThisIP, int checkThisPort){
+    public boolean scanPort(String checkThisIP, String checkThisPortString){
 
+        //convert the input from string to int
+        int checkThisPort=Integer.parseInt(checkThisPortString);
+
+        //make sure the IP address entered is actually usable
         InetAddress ipAddress = null;
         try {
             ipAddress=InetAddress.getByName(checkThisIP);
         }catch (UnknownHostException setIP){
             logError("Unusable IP, check Host field", setIP);
         }
-        logInfo("Starting connection check on port"+checkThisPort);
+        logInfo("Starting connection check on port: "+checkThisPort+"\n");
+
+        //create new socket to be used for port specific connection
         try(Socket socket=new Socket()) {
             //if connection works port is open, otherwise Exception is thrown
             socket.connect(new InetSocketAddress(ipAddress,checkThisPort),500);
-            logInfo("Connection to port "+checkThisPort+" was successful, port is reachable");
+            logInfo("Connection to port "+checkThisPort+" was successful, \n port is reachable");
             return true;
-        }catch (IOException e){
-            logInfo("Connection to port "+checkThisPort+" failed, check firewall or host config");
+        }
+        //if connection fails port is not available
+        catch (IOException e){
+            logInfo("Connection to port "+checkThisPort+" failed \n check firewall or host config");
             return false;
             }
 

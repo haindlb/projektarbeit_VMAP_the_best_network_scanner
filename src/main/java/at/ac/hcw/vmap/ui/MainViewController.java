@@ -43,9 +43,9 @@ public class MainViewController implements Loggable {
         // TODO scan starten
         //Test
         icmpScanner = new IcmpScanner();
-        icmpScanner.scanICMP("192.168.115.59");
+        icmpScanner.scanICMP(fldTarget.getText());
         portScanner = new PortScanner();
-        portScanner.scanPort("192.168.115.59",80);
+        portScanner.scanPort(fldTarget.getText(),fldPort.getText());
 
     }
 

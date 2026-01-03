@@ -15,8 +15,9 @@ public class IcmpScanner implements Loggable {
     //Expects a Host Object to be checked; returns a Boolean true if reachable false if not
 
 
-    public void scanICMP(String checkThisIP){
+    public boolean scanICMP(String checkThisIP){
 
+        //make sure entered IP is usable
         InetAddress ipAddress = null;
         try {
             ipAddress=InetAddress.getByName(checkThisIP);
@@ -24,20 +25,20 @@ public class IcmpScanner implements Loggable {
             logError("Unusable IP, check Host field", setIP);
         }
 
-
-       logInfo("Starting ICMP Check");
+       logInfo("Starting ICMP Check \n");
+        //check if host is reachable
         try {
             if(ipAddress.isReachable(1000)){
                 logInfo("Host is reachable, ICMP Check successful");
-                //return true;
+                return true;
             }
             else {
-                logInfo("Host is unreachable, check firewall settings and IP address");
-                //return false;
+                logInfo("Host is unreachable \n check firewall settings and IP address");
+                return false;
             }
         }catch (IOException ioException) {
             logError("IO exception during ICMP check",ioException);
-            //return false;
+            return false;
         }
 
     }

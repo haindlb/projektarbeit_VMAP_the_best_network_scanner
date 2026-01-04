@@ -25,7 +25,9 @@ public class IcmpScanner implements Loggable {
             logError("Unusable IP, check Host field", setIP);
         }
 
-       logInfo("Starting ICMP Check \n");
+        //logInfo(ipAddress.toString()+" debug");
+
+       logInfo("Starting ICMP Check");
         //check if host is reachable
         try {
             if(ipAddress.isReachable(1000)){
@@ -33,7 +35,7 @@ public class IcmpScanner implements Loggable {
                 return true;
             }
             else {
-                logInfo("Host is unreachable \n check firewall settings and IP address");
+                logInfo("Host is unreachable check firewall settings and IP address");
                 return false;
             }
         }catch (IOException ioException) {

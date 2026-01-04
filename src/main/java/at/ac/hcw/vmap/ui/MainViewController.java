@@ -42,8 +42,15 @@ public class MainViewController implements Loggable {
     private void startScanClicked() {
         // TODO scan starten
         //Test
+
+        String target=fldTarget.getText();
         icmpScanner = new IcmpScanner();
-        icmpScanner.scanICMP(fldTarget.getText());
+        if (!target.isEmpty()) {
+            icmpScanner.scanICMP(target);
+        }
+        else {
+            logWarn("No Host provided, please fill out field");
+        }
         portScanner = new PortScanner();
         portScanner.scanPort(fldTarget.getText(),fldPort.getText());
 

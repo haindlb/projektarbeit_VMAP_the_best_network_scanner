@@ -23,18 +23,18 @@ public class PortScanner implements Loggable {
         }catch (UnknownHostException setIP){
             logError("Unusable IP, check Host field", setIP);
         }
-        logInfo("Starting connection check on port: "+checkThisPort+"\n");
+        logInfo("Starting connection check on port: "+checkThisPort);
 
         //create new socket to be used for port specific connection
         try(Socket socket=new Socket()) {
             //if connection works port is open, otherwise Exception is thrown
             socket.connect(new InetSocketAddress(ipAddress,checkThisPort),500);
-            logInfo("Connection to port "+checkThisPort+" was successful, \n port is reachable");
+            logInfo("Connection to port "+checkThisPort+" was successful, port is reachable");
             return true;
         }
         //if connection fails port is not available
         catch (IOException e){
-            logInfo("Connection to port "+checkThisPort+" failed \n check firewall or host config");
+            logInfo("Connection to port "+checkThisPort+" failed check firewall or host config");
             return false;
             }
 

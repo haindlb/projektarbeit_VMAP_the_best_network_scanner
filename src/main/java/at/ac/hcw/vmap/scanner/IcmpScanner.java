@@ -12,10 +12,17 @@ public class IcmpScanner implements Loggable {
 
     public static final Logger LOG = Logger.getLogger(IcmpScanner.class.getName());
 
-    //Expects a Host Object to be checked; returns a Boolean true if reachable false if not
+    //Expects a Host Object to be checked; returns a Boolean true if reachable, false if not
 
 
     public boolean scanICMP(String checkThisIP){
+
+        //do format check beforehand
+        if (!checkThisIP.matches("\\d+\\.\\d+\\.\\d+\\.\\d+")) {
+            //System.out.println("nope");
+            logWarn("Unusable IP, check Host field");
+            return false;
+        }
 
         //make sure entered IP is usable
         InetAddress ipAddress = null;
@@ -23,12 +30,15 @@ public class IcmpScanner implements Loggable {
             ipAddress=InetAddress.getByName(checkThisIP);
         }catch (UnknownHostException setIP){
             logError("Unusable IP, check Host field", setIP);
+            //catches incomplete IPs
+            return false;
         }
 
         //logInfo(ipAddress.toString()+" debug");
 
        logInfo("Starting ICMP Check");
         //check if host is reachable
+        System.out.println(ipAddress);
         try {
             if(ipAddress.isReachable(1000)){
                 logInfo("Host is reachable, ICMP Check successful");
@@ -50,7 +60,7 @@ public class IcmpScanner implements Loggable {
 /*
     public void scanIcmp(){
 
-        logInfo("Scanning ICMP.. PLease Wait!");
+        logInfo("Scanning ICMP.. Please Wait!");
 
 
         try {

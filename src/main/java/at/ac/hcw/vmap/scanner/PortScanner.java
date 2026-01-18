@@ -16,6 +16,13 @@ public class PortScanner implements Loggable {
         //convert the input from string to int
         int checkThisPort=Integer.parseInt(checkThisPortString);
 
+        //formatierungs check
+        if (!checkThisIP.matches("\\d+\\.\\d+\\.\\d+\\.\\d+")) {
+            //System.out.println("nope");
+            logWarn("Unusable IP, check Host field");
+            return false;
+        }
+
         //make sure the IP address entered is actually usable
         InetAddress ipAddress = null;
         try {

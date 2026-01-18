@@ -17,24 +17,21 @@ public class IcmpScanner implements Loggable {
 
     public boolean scanICMP(String checkThisIP){
 
-        //do format check beforehand
+        //formatierungs check
         if (!checkThisIP.matches("\\d+\\.\\d+\\.\\d+\\.\\d+")) {
             //System.out.println("nope");
             logWarn("Unusable IP, check Host field");
             return false;
         }
 
-        //make sure entered IP is usable
+        //konvertiere zu IP Objekt
         InetAddress ipAddress = null;
         try {
             ipAddress=InetAddress.getByName(checkThisIP);
         }catch (UnknownHostException setIP){
             logError("Unusable IP, check Host field", setIP);
-            //catches incomplete IPs
             return false;
         }
-
-        //logInfo(ipAddress.toString()+" debug");
 
        logInfo("Starting ICMP Check");
         //check if host is reachable

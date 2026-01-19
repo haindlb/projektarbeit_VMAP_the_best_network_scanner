@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 public class IcmpScanner implements Loggable {
 
-    public static final Logger LOG = Logger.getLogger(IcmpScanner.class.getName());
 
     //Expects a Host Object to be checked; returns a Boolean true if reachable, false if not
 

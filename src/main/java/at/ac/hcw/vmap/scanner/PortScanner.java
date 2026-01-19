@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 public class PortScanner implements Loggable {
 
-    public static final Logger LOG = Logger.getLogger(PortScanner.class.getName());
 
     //Expects a Host and Port to be checked; returns a Boolean true if reachable false if not, also logs results
     public boolean scanPort(String checkThisIP, String checkThisPortString){

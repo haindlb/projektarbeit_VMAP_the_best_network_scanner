@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public final class LoggingConfig {
 
-    //private Konstruktor mit absicht -> kein Erstellen des Obejkts der Klasse
+    //private Konstruktor mit absicht -> kein Erstellen des Objekts der Klasse
     private LoggingConfig(){
 
     }
@@ -19,7 +19,7 @@ public final class LoggingConfig {
         //Level INFO: INFO, WARNING, SEVERE werden geloggt / FINE, FINER, FINEST werden ignoriert
         //ALL geht nicht ohne JavaFX Filter, bitte auf INFO lassen
 
-        //Logger entscheidet was gelogt wird, Handler entscheidet wohin es geht
+        //Logger entscheidet was geloggt wird, Handler entscheidet wohin es geht
         //RootLogger Hierachisch über allen anderen Loggern
         //Bitte lassen sonst in jeder Klasse Loglevel manuel setzen
 
@@ -29,7 +29,7 @@ public final class LoggingConfig {
         //Eigener Handler für FXListView geschrieben
         //Über Config Klasse Einstellungen für max. Logs setzen
 
-        LogHandlerList fxHandler = new LogHandlerList(items, listView, 1000);
+        LogHandlerListView fxHandler = new LogHandlerListView(items, listView, 1000);
         fxHandler.setLevel(Level.INFO);
 
         //Eigener Handler für CSVExport geschrieben

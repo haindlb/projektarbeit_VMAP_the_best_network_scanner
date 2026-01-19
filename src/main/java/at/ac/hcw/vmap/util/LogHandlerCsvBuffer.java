@@ -23,7 +23,7 @@ public class LogHandlerCsvBuffer extends Handler {
     @Override
     public synchronized void publish(LogRecord record) {
 
-        if(!isLoggable(record)) return;
+        if(!isLoggable(record)) return; //Prüfung Loglevel und Filter
         logBuffer.addLast(record);
         while(logBuffer.size() > maxRows){
             logBuffer.removeFirst();

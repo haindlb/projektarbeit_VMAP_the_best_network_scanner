@@ -23,17 +23,15 @@ public class MainViewController implements Loggable {
     @FXML private TextField fldPort;
     @FXML private ListView<String> lstLog;
     private final ObservableList<String> logItems = FXCollections.observableArrayList();
-    public static final Logger LOG = Logger.getLogger(MainViewController.class.getName());
     private IcmpScanner icmpScanner;
     private PortScanner portScanner;
-    private LogHandlerCsvBuffer csvBuffer;
     private CsvExportService exportService;
 
     public void initialize(){
 
         lstLog.setItems(logItems);
         logItems.add("---Start Logging---");
-        logItems.add("Bitte Ordner C:\\Temp\\Export anlegen");
+        logItems.add("Please create Directory C:\\Temp\\Export");
         LoggingConfig.connectListView(logItems, lstLog); //Darf nur einmal aufgerufen werden sonst doppelte Registrierung von Handler
 
     }
@@ -63,7 +61,7 @@ public class MainViewController implements Loggable {
         LogHandlerCsvBuffer csvBuffer = findMyHandler();
 
         if(csvBuffer == null){
-            logWarn("CSV Buffer Handler nicht gefunden");
+            logWarn("CSV Buffer Handler not found");
             return;
         }
 

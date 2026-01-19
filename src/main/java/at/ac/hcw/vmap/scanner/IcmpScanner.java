@@ -33,14 +33,13 @@ public class IcmpScanner implements Loggable {
 
        logInfo("Starting ICMP Check");
         //check if host is reachable
-        System.out.println(ipAddress);
         try {
             if(ipAddress.isReachable(1000)){
-                logInfo("Host is reachable, ICMP Check successful");
+                logInfo("Host " + ipAddress + " is reachable, ICMP Check successful");
                 return true;
             }
             else {
-                logInfo("Host is unreachable check firewall settings and IP address");
+                logInfo("Host" + ipAddress + " is unreachable check firewall settings and IP address");
                 return false;
             }
         }catch (IOException ioException) {

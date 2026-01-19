@@ -34,12 +34,12 @@ public class PortScanner implements Loggable {
         try(Socket socket=new Socket()) {
             //if connection works port is open, otherwise Exception is thrown
             socket.connect(new InetSocketAddress(ipAddress,checkThisPort),500);
-            logInfo("Connection to port "+checkThisPort+" was successful, port is reachable");
+            logInfo("Connection to port " + checkThisPort + " was successful, port is reachable");
             return true;
         }
         //if connection fails port is not available
         catch (IOException e){
-            logInfo("Connection to port "+checkThisPort+" failed check firewall or host config");
+            logInfo("Connection to port " + checkThisPort + " failed check firewall or host config");
             return false;
             }
 

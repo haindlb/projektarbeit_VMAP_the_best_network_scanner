@@ -24,8 +24,8 @@
       <font>
          <Font name="Arial" size="12.0" />
       </font></Button>
-    <VBox layoutX="498.0" layoutY="120.0" prefHeight="440.0" prefWidth="350.0" spacing="10.0">
-        <ListView fx:id="lstLog" prefHeight="440.0" prefWidth="350.0" style="-fx-border-color: black; -fx-border-width: 2;" />
+    <VBox layoutX="448.0" layoutY="120.0" prefHeight="440.0" prefWidth="400.0" spacing="10.0">
+        <ListView fx:id="lstLog" prefHeight="440.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2;" />
         <Button fx:id="btnExportCsv" onAction="#exportCsvClicked" prefHeight="28.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 2;" text="EXPORT CSV" />
     </VBox>
 </AnchorPane>

@@ -31,7 +31,8 @@ public class CsvExportService implements Loggable {
 
         try(FileWriter writer = new FileWriter(exportFile, false)){
 
-            writer.write("timestamp,level,message,exceptionType,exceptionMessage"); //Header
+            writer.write("timestamp,level,message,exceptionType,exceptionMessage");//Header
+            writer.write(NEWLINE);
 
             for(int i = 0; i < csvBuffer.size(); i++){
 

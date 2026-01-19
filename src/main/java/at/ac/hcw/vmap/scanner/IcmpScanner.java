@@ -5,7 +5,6 @@ import at.ac.hcw.vmap.util.Loggable;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Logger;
 
 
 public class IcmpScanner implements Loggable {

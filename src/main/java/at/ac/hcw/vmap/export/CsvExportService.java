@@ -4,10 +4,8 @@ import at.ac.hcw.vmap.util.Loggable;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;

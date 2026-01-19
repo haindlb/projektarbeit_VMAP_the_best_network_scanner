@@ -4,7 +4,6 @@ import at.ac.hcw.vmap.util.Loggable;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.logging.Logger;
 
 public class PortScanner implements Loggable {
 

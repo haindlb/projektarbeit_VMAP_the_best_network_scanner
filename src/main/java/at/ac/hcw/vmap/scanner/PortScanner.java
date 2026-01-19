@@ -9,9 +9,10 @@ public class PortScanner implements Loggable {
 
 
     //Expects a Host and Port to be checked; returns a Boolean true if reachable false if not, also logs results
+    //Erwartet einen Host und einen Port zur Überprüfung; gibt einen Boolean-Wert als true zurück, wenn der Port erreichbar ist
     public boolean scanPort(String checkThisIP, String checkThisPortString){
 
-        //convert the input from string to int
+        //konvertiere input string zu int
         int checkThisPort=Integer.parseInt(checkThisPortString);
 
         //formatierungs check
@@ -21,7 +22,13 @@ public class PortScanner implements Loggable {
             return false;
         }
 
-        //make sure the IP address entered is actually usable
+        //überprüfe ob port in valider range ist
+        if (checkThisPort<1||checkThisPort>65535){
+            logWarn("Unsuable Port, please enter valid value");
+            return false;
+        }
+
+        //konvertiere String zu IP Adress Objekt
         InetAddress ipAddress = null;
         try {
             ipAddress=InetAddress.getByName(checkThisIP);
@@ -30,14 +37,14 @@ public class PortScanner implements Loggable {
         }
         logInfo("Starting connection check on port: "+checkThisPort);
 
-        //create new socket to be used for port specific connection
+        //erstellt socket zum verbindung überprüfen
         try(Socket socket=new Socket()) {
             //if connection works port is open, otherwise Exception is thrown
             socket.connect(new InetSocketAddress(ipAddress,checkThisPort),500);
             logInfo("Connection to port " + checkThisPort + " was successful, port is reachable");
             return true;
         }
-        //if connection fails port is not available
+        //wenn verbindung fehlschlägt --> port nicht erreichbar
         catch (IOException e){
             logInfo("Connection to port " + checkThisPort + " failed check firewall or host config");
             return false;

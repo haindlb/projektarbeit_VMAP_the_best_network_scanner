@@ -10,8 +10,7 @@ import java.net.UnknownHostException;
 public class IcmpScanner implements Loggable {
 
 
-    //Expects a Host Object to be checked; returns a Boolean true if reachable, false if not
-
+    //Erwartet einen Host zur Überprüfung; gibt einen Boolean-Wert als true zurück, wenn der Host erreichbar ist
 
     public boolean scanICMP(String checkThisIP){
 
@@ -22,7 +21,7 @@ public class IcmpScanner implements Loggable {
             return false;
         }
 
-        //konvertiere zu IP Objekt
+        //konvertiere zu String IP Objekt
         InetAddress ipAddress = null;
         try {
             ipAddress=InetAddress.getByName(checkThisIP);
@@ -32,7 +31,7 @@ public class IcmpScanner implements Loggable {
         }
 
        logInfo("Starting ICMP Check");
-        //check if host is reachable
+        //überprüfe ob host erreichbar ist
         try {
             if(ipAddress.isReachable(1000)){
                 logInfo("Host " + ipAddress + " is reachable, ICMP Check successful");
